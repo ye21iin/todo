@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Todo App
 
-## Getting Started
+Next.js와 JSON Server를 사용한 간단한 Todo 애플리케이션입니다.
 
-First, run the development server:
+## 기술 스택
+
+- **Frontend**
+  - Next.js
+  - TypeScript
+  - Tailwind CSS
+  - Tanstack Query
+  - Headless UI
+
+- **Backend**
+  - JSON Server
+  - Render (호스팅)
+
+## 주요 기능
+
+- 할 일 추가/삭제
+- 할 일 완료 상태 토글
+- 할 일 필터링 (전체/완료/미완료)
+- 반응형 디자인
+- 스켈레톤 UI
+
+## 시작하기
+
+### 프론트엔드 (Next.js)
 
 ```bash
+# 저장소 클론
+git clone [repository-url]
+
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 백엔드 (JSON Server)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# JSON Server 설치
+npm install -g json-server
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 서버 실행
+json-server --watch db.json --port 3000
+```
 
-## Learn More
+## 환경 변수 설정
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`.env.local` 파일을 생성하고 다음 환경변수를 설정합니다:
