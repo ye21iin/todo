@@ -1,12 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-
-interface Todo {
-  id: number;
-  title: string;
-  completed: boolean;
-}
+import type { Todo } from "./types";
 
 const Todos = () => {
   const { data, isPending, error } = useQuery<Todo[]>({
