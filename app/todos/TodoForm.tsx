@@ -5,15 +5,16 @@ import { useAddTodoMutation } from "../../lib/hooks/mutation";
 
 const TodoForm = () => {
   const [title, setTitle] = useState("");
-
-  // 할 일을 추가하는 뮤테이션 정의 (새로운 훅 사용)
   const addTodoMutation = useAddTodoMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     if (title.trim()) {
-      addTodoMutation.mutate(title);
+      addTodoMutation.mutate(title, {
+        onSuccess: () => {
+          setTitle("");
+        },
+      });
     }
   };
 
