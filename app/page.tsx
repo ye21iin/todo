@@ -1,5 +1,5 @@
 import TodoForm from "./todos/TodoForm";
-import Todos from "./todos/Todos";
+import FilteredTodoList from "./todos/FilteredTodoList";
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
         MY TODO LIST
       </h1>
       <TodoForm />
-      <Todos />
+      <FilteredTodoList />
     </div>
   );
 }

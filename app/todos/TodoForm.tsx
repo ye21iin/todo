@@ -26,7 +26,7 @@ const TodoForm = () => {
           placeholder="할 일을 입력하세요."
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3C3C43]"
+          className="flex-grow p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#3C3C43] placeholder-gray-500"
         />
         <button
           type="submit"

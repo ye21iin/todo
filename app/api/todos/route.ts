@@ -1,8 +1,16 @@
 import { NextResponse } from "next/server";
 
 // GET - 데이터 조회
-export async function GET() {
-  const res = await fetch('http://localhost:3000/todos');
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const completedFilter = searchParams.get('completed');
+
+  let url = 'http://localhost:3000/todos';
+  if (completedFilter !== null) { 
+    url += `?completed=${completedFilter}`;
+  }
+
+  const res = await fetch(url);
   if (!res.ok) {
     return NextResponse.json(
       { error: "Failed to fetch todos" },

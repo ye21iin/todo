@@ -6,11 +6,24 @@ import type { Todo } from "./types";
 import { Trash } from "lucide-react";
 import { Checkbox } from '@headlessui/react';
 
+interface TodosProps {
+  filter: boolean | null;
+}
 
-const Todos = () => {
+const Todos = ({ filter }: TodosProps) => {
   const { data, isPending, error } = useQuery<Todo[]>({
-    queryKey: ["todos"],
-    queryFn: () => fetch("/api/todos").then((res) => res.json()),
+    queryKey: ["todos", filter],
+    queryFn: async () => {
+      let url = "/api/todos";
+      if (filter !== null) {
+        url += `?completed=${filter}`;
+      }
+      const res = await fetch(url);
+      if (!res.ok) {
+        throw new Error("Failed to fetch todos");
+      }
+      return res.json();
+    },
   });
 
   const updateTodoMutation = useUpdateTodoMutation();
