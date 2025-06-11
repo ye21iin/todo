@@ -2,9 +2,10 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useUpdateTodoMutation, useDeleteTodoMutation } from "../../lib/hooks/mutation";
-import type { Todo } from "./types";
-import { Trash } from "lucide-react";
+import { Trash, Check } from "lucide-react";
 import { Checkbox } from '@headlessui/react';
+import TodoSkeleton from "./TodoSkeleton";
+import type { Todo } from "./types";
 
 interface TodosProps {
   filter: boolean | null;
@@ -40,7 +41,7 @@ const Todos = ({ filter }: TodosProps) => {
     deleteTodoMutation.mutate(id);
   };
 
-  if (isPending) return <div className="text-center py-4 text-gray-600">로딩 중...</div>;
+  if (isPending) return <TodoSkeleton />;
   if (error) return <div className="text-center py-4 text-red-600">에러가 발생했습니다: {error.message}</div>;
   if (!data || data.length === 0) return <div className="text-center py-4 text-gray-500">작성된 할 일이 없습니다.</div>;
 
@@ -54,15 +55,16 @@ const Todos = ({ filter }: TodosProps) => {
               ${todo.completed ? "bg-gray-100" : "bg-white"}`}
           >
             <Checkbox
-                checked={todo.completed}
-                onChange={() => handleToggleComplete(todo)}
-                className={`group block size-6 rounded border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-[#3C3C43]
-                  ${todo.completed ? 'bg-[#3C3C43] border-[#3C3C43]' : 'bg-white border-gray-300'}`}
-              >
-                <svg className="stroke-white opacity-0 group-data-[checked]:opacity-100 transition-opacity duration-200" viewBox="0 0 14 14" fill="none">
-                  <path d="M3 8L6 11L11 3.5" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Checkbox>
+              checked={todo.completed}
+              onChange={() => handleToggleComplete(todo)}
+              className={`group block size-6 rounded border transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-[#3C3C43]
+                ${todo.completed ? 'bg-[#3C3C43] border-[#3C3C43]' : 'bg-white border-gray-300'}`}
+            >
+              <Check 
+                size={23} 
+                className="stroke-white opacity-0 group-data-[checked]:opacity-100 transition-opacity duration-200" 
+              />
+            </Checkbox>
             <span className={`flex-grow text-lg font-medium text-[#3C3C43] ml-3 ${todo.completed ? "line-through text-gray-500" : ""}`}>
               {todo.title}
             </span>
