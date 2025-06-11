@@ -1,3 +1,19 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "2cda",
+      "title": "과제하기",
+      "completed": false
+    },
+    {
+      "id": "4498",
+      "title": "이력서 제출하기",
+      "completed": false
+    },
+    {
+      "id": "c7f3",
+      "title": "눈물닦기",
+      "completed": true
+    }
+  ]
 }
