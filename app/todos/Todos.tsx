@@ -1,7 +1,7 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useUpdateTodoMutation, useDeleteTodoMutation } from "../../lib/hooks/mutation";
+import { useTodosQuery } from "../../lib/hooks/queries";
 import { Trash, Check } from "lucide-react";
 import { Checkbox } from '@headlessui/react';
 import TodoSkeleton from "./TodoSkeleton";
@@ -12,21 +12,7 @@ interface TodosProps {
 }
 
 const Todos = ({ filter }: TodosProps) => {
-  const { data, isPending, error } = useQuery<Todo[]>({
-    queryKey: ["todos", filter],
-    queryFn: async () => {
-      let url = "/api/todos";
-      if (filter !== null) {
-        url += `?completed=${filter}`;
-      }
-      const res = await fetch(url);
-      if (!res.ok) {
-        throw new Error("Failed to fetch todos");
-      }
-      return res.json();
-    },
-  });
-
+  const { data, isPending, error } = useTodosQuery(filter);
   const updateTodoMutation = useUpdateTodoMutation();
   const deleteTodoMutation = useDeleteTodoMutation();
 
