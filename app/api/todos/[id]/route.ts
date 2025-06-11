@@ -19,10 +19,11 @@ export async function OPTIONS() {
 // PATCH - 데이터 수정
 export async function PATCH(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await params;
   const { completed } = await request.json();
+
 
   const res = await fetch(`${API_URL}/todos/${id}`, {
     method: "PATCH",
